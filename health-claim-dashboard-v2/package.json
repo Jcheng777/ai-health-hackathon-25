@@ -61,13 +61,16 @@
     "pdf-parse": "^1.1.1",
     "openai": "^4.28.0",
     "multer": "^1.4.5-lts.1",
-    "@types/multer": "^1.4.11"
+    "@types/multer": "^1.4.11",
+    "tesseract.js": "^5.0.4",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/pdf-parse": "^1.1.4",
+    "@types/sharp": "^0.32.0",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
