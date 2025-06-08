@@ -1,0 +1,2 @@
+Model,Accuracy,Average_Confidence,Precision,Recall,F1_Score,Evaluation_Time_Seconds,Correct_Predictions,Total_Predictions
+ClinicalBERT + OpenAI,0.64,0.6546000000000001,0.8421052631578947,0.7272727272727273,0.7804878048780488,0.0022690296173095703,16,25

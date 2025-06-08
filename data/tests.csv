@@ -1,0 +1,101 @@
+Claim ID,Provider ID,Patient ID,Date of Service,Billed Amount,Procedure Code,Diagnosis Code,Allowed Amount,Paid Amount,Insurance Type,Claim Status,Reason Code,Follow-up Required,AR Status,Outcome
+TEST001,1001,2001,01/15/2025,8500.00,99284,I21.9,7200.00,6800.00,Medicare,Paid,Emergency treatment,No,Closed,Approved
+TEST002,1002,2002,01/16/2025,12000.00,31500,J44.1,9500.00,8900.00,Commercial,Paid,Life-saving procedure,No,Closed,Approved
+TEST003,1003,2003,01/17/2025,250.00,77057,Z12.31,200.00,200.00,Commercial,Paid,Preventive screening,No,Closed,Approved
+TEST004,1004,2004,01/18/2025,350.00,99395,Z00.00,280.00,280.00,Medicaid,Paid,Annual physical,No,Closed,Approved
+TEST005,1005,2005,01/19/2025,45000.00,27447,M17.11,38000.00,35000.00,Medicare,Paid,Medical necessity,No,Closed,Approved
+TEST006,1006,2006,01/20/2025,125000.00,33533,I25.10,95000.00,88000.00,Commercial,Paid,Life-saving surgery,No,Closed,Approved
+TEST007,1007,2007,01/21/2025,180.00,90837,F33.1,150.00,140.00,Commercial,Paid,Mental health treatment,No,Closed,Approved
+TEST008,1008,2008,01/22/2025,400.00,90801,F31.9,320.00,290.00,Medicare,Paid,Psychiatric evaluation,No,Closed,Approved
+TEST009,1009,2009,01/23/2025,75000.00,96413,C78.00,65000.00,0.00,Commercial,Under Review,Experimental treatment,Yes,Pending,Pending_Review
+TEST010,1010,2010,01/24/2025,8000.00,15823,H02.30,6500.00,0.00,Commercial,Denied,Cosmetic procedure,No,Denied,Denied
+TEST011,1011,2011,01/25/2025,22000.00,28810,E11.621,18000.00,16500.00,Medicare,Paid,Diabetic complication,No,Closed,Approved
+TEST012,1012,2012,01/26/2025,45.00,90471,Z23,35.00,35.00,Medicaid,Paid,Pediatric immunization,No,Closed,Approved
+TEST013,1013,2013,01/27/2025,120.00,97110,M25.561,95.00,85.00,Commercial,Paid,Post-surgical rehab,No,Closed,Approved
+TEST014,1014,2014,01/28/2025,3500.00,99285,R06.02,2800.00,2600.00,Medicare,Paid,Respiratory emergency,No,Closed,Approved
+TEST015,1015,2015,01/29/2025,150000.00,33404,I25.10,120000.00,0.00,Commercial,Under Review,High-cost experimental,Yes,Pending,Pending_Review
+TEST016,1016,2016,01/30/2025,15000.00,15734,Z42.1,12000.00,0.00,Commercial,Denied,Cosmetic surgery,No,Denied,Denied
+TEST017,1017,2017,02/01/2025,250.00,99213,K59.00,200.00,190.00,Commercial,Paid,Routine office visit,No,Closed,Approved
+TEST018,1018,2018,02/02/2025,95000.00,38115,C50.911,75000.00,70000.00,Medicare,Paid,Cancer surgery,No,Closed,Approved
+TEST019,1019,2019,02/03/2025,450.00,99283,S72.001A,380.00,350.00,Commercial,Paid,Emergency fracture,No,Closed,Approved
+TEST020,1020,2020,02/04/2025,25000.00,27236,M79.3,20000.00,0.00,Commercial,Denied,Experimental procedure,No,Denied,Denied
+TEST021,1021,2021,02/05/2025,85.00,99213,Z87.891,70.00,65.00,Medicare,Paid,Follow-up visit,No,Closed,Approved
+TEST022,1022,2022,02/06/2025,1200.00,90834,F32.2,950.00,900.00,Commercial,Paid,Depression therapy,No,Closed,Approved
+TEST023,1023,2023,02/07/2025,800.00,99223,J18.9,650.00,600.00,Medicare,Paid,Pneumonia treatment,No,Closed,Approved
+TEST024,1024,2024,02/08/2025,55000.00,47562,K80.20,45000.00,42000.00,Commercial,Paid,Laparoscopic surgery,No,Closed,Approved
+TEST025,1025,2025,02/09/2025,180000.00,00670,Z37.0,0.00,0.00,Commercial,Denied,Investigational,Yes,Denied,Denied
+TEST026,1026,2026,02/10/2025,3500.00,29827,M75.100,2800.00,2600.00,Commercial,Paid,Rotator cuff repair,No,Closed,Approved
+TEST027,1027,2027,02/11/2025,2200.00,52000,N40.1,1800.00,1650.00,Medicare,Paid,Prostate surgery,No,Closed,Approved
+TEST028,1028,2028,02/12/2025,7500.00,64483,M54.16,6000.00,5500.00,Commercial,Paid,Spinal injection,No,Closed,Approved
+TEST029,1029,2029,02/13/2025,120000.00,0016T,C25.9,0.00,0.00,Commercial,Denied,Experimental gene therapy,Yes,Denied,Denied
+TEST030,1030,2030,02/14/2025,420.00,99232,F41.1,350.00,320.00,Medicare,Paid,Anxiety treatment,No,Closed,Approved
+TEST031,1031,2031,02/15/2025,65000.00,27130,M16.11,52000.00,48000.00,Medicare,Paid,Hip replacement,No,Closed,Approved
+TEST032,1032,2032,02/16/2025,95.00,99213,I10,80.00,75.00,Commercial,Paid,Hypertension follow-up,No,Closed,Approved
+TEST033,1033,2033,02/17/2025,12000.00,30520,D22.9,9500.00,0.00,Commercial,Denied,Cosmetic skin lesion,No,Denied,Denied
+TEST034,1034,2034,02/18/2025,350.00,93000,I25.10,280.00,260.00,Medicare,Paid,EKG monitoring,No,Closed,Approved
+TEST035,1035,2035,02/19/2025,85000.00,43239,C78.89,70000.00,65000.00,Commercial,Paid,Cancer staging,No,Closed,Approved
+TEST036,1036,2036,02/20/2025,4500.00,99284,T14.8,3600.00,3300.00,Commercial,Paid,Multi-trauma emergency,No,Closed,Approved
+TEST037,1037,2037,02/21/2025,200000.00,S2095,C92.10,0.00,0.00,Commercial,Denied,Experimental CAR-T,Yes,Denied,Denied
+TEST038,1038,2038,02/22/2025,275.00,99395,Z00.121,220.00,220.00,Commercial,Paid,Pediatric wellness,No,Closed,Approved
+TEST039,1039,2039,02/23/2025,18000.00,43280,K21.9,14500.00,13000.00,Commercial,Paid,GERD surgery,No,Closed,Approved
+TEST040,1040,2040,02/24/2025,6000.00,30140,J34.2,4800.00,0.00,Commercial,Denied,Cosmetic rhinoplasty,No,Denied,Denied
+TEST041,1041,2041,02/25/2025,380.00,90847,F84.0,300.00,280.00,Medicaid,Paid,Autism therapy,No,Closed,Approved
+TEST042,1042,2042,02/26/2025,950.00,99223,N18.4,750.00,700.00,Medicare,Paid,Kidney disease,No,Closed,Approved
+TEST043,1043,2043,02/27/2025,75000.00,62223,G91.1,60000.00,55000.00,Commercial,Paid,Brain shunt surgery,No,Closed,Approved
+TEST044,1044,2044,02/28/2025,25000.00,C9399,C50.912,0.00,0.00,Commercial,Denied,Investigational drug,Yes,Denied,Denied
+TEST045,1045,2045,03/01/2025,220.00,99214,E78.5,180.00,170.00,Commercial,Paid,Cholesterol management,No,Closed,Approved
+TEST046,1046,2046,03/02/2025,15000.00,23472,M25.512,12000.00,11000.00,Commercial,Paid,Shoulder fusion,No,Closed,Approved
+TEST047,1047,2047,03/03/2025,8500.00,52601,N40.1,7000.00,6500.00,Medicare,Paid,Prostate procedure,No,Closed,Approved
+TEST048,1048,2048,03/04/2025,5000.00,19318,Z42.8,0.00,0.00,Commercial,Denied,Breast augmentation,No,Denied,Denied
+TEST049,1049,2049,03/05/2025,1800.00,45380,K63.5,1400.00,1300.00,Commercial,Paid,Colonoscopy biopsy,No,Closed,Approved
+TEST050,1050,2050,03/06/2025,165000.00,C9136,C92.00,0.00,0.00,Commercial,Denied,Experimental leukemia,Yes,Denied,Denied
+TEST051,1051,2051,03/07/2025,320.00,99215,F90.2,250.00,230.00,Commercial,Paid,ADHD management,No,Closed,Approved
+TEST052,1052,2052,03/08/2025,42000.00,49505,K40.90,35000.00,32000.00,Commercial,Paid,Hernia repair,No,Closed,Approved
+TEST053,1053,2053,03/09/2025,2800.00,92950,I46.9,2200.00,2000.00,Medicare,Paid,Cardiopulmonary resuscitation,No,Closed,Approved
+TEST054,1054,2054,03/10/2025,12000.00,17311,Z42.2,0.00,0.00,Commercial,Denied,Cosmetic scar revision,No,Denied,Denied
+TEST055,1055,2055,03/11/2025,680.00,99232,F25.9,550.00,500.00,Medicare,Paid,Schizoaffective disorder,No,Closed,Approved
+TEST056,1056,2056,03/12/2025,35000.00,36556,R57.0,28000.00,26000.00,Commercial,Paid,Central line placement,No,Closed,Approved
+TEST057,1057,2057,03/13/2025,95000.00,0312T,C78.02,0.00,0.00,Commercial,Denied,Experimental immunotherapy,Yes,Denied,Denied
+TEST058,1058,2058,03/14/2025,185.00,99214,F60.3,150.00,140.00,Commercial,Paid,Borderline personality,No,Closed,Approved
+TEST059,1059,2059,03/15/2025,28000.00,32551,J93.11,22000.00,20000.00,Commercial,Paid,Pneumothorax surgery,No,Closed,Approved
+TEST060,1060,2060,03/16/2025,85000.00,C9024,C15.9,0.00,0.00,Commercial,Denied,Experimental esophageal,Yes,Denied,Denied
+TEST061,1061,2061,03/17/2025,425.00,99285,R50.9,340.00,320.00,Medicare,Paid,Fever emergency,No,Closed,Approved
+TEST062,1062,2062,03/18/2025,15000.00,21501,S02.2,12000.00,11000.00,Commercial,Paid,Nasal fracture repair,No,Closed,Approved
+TEST063,1063,2063,03/19/2025,7500.00,15738,Z42.3,0.00,0.00,Commercial,Denied,Cosmetic abdominoplasty,No,Denied,Denied
+TEST064,1064,2064,03/20/2025,290.00,96116,F84.0,230.00,220.00,Medicaid,Paid,Autism evaluation,No,Closed,Approved
+TEST065,1065,2065,03/21/2025,52000.00,25500,S52.501A,42000.00,38000.00,Commercial,Paid,Radius fracture surgery,No,Closed,Approved
+TEST066,1066,2066,03/22/2025,110000.00,G0463,C25.9,0.00,0.00,Commercial,Denied,Experimental pancreatic,Yes,Denied,Denied
+TEST067,1067,2067,03/23/2025,155.00,90734,Z23,125.00,125.00,Medicaid,Paid,Meningococcal vaccine,No,Closed,Approved
+TEST068,1068,2068,03/24/2025,18500.00,73610,S82.001A,15000.00,14000.00,Commercial,Paid,Ankle fracture imaging,No,Closed,Approved
+TEST069,1069,2069,03/25/2025,9500.00,19342,Z42.1,0.00,0.00,Commercial,Denied,Cosmetic breast reduction,No,Denied,Denied
+TEST070,1070,2070,03/26/2025,480.00,90862,F31.9,380.00,350.00,Medicare,Paid,Bipolar medication mgmt,No,Closed,Approved
+TEST071,1071,2071,03/27/2025,65000.00,12001,T01.9,52000.00,48000.00,Commercial,Paid,Complex wound repair,No,Closed,Approved
+TEST072,1072,2072,03/28/2025,145000.00,Q0083,C80.1,0.00,0.00,Commercial,Denied,Experimental metastatic,Yes,Denied,Denied
+TEST073,1073,2073,03/29/2025,320.00,90585,Z23,255.00,255.00,Medicaid,Paid,BCG vaccine,No,Closed,Approved
+TEST074,1074,2074,03/30/2025,22000.00,90901,F42.2,18000.00,16500.00,Commercial,Paid,OCD biofeedback,No,Closed,Approved
+TEST075,1075,2075,03/31/2025,8500.00,15825,Z42.1,0.00,0.00,Commercial,Denied,Cosmetic face lift,No,Denied,Denied
+TEST076,1076,2076,04/01/2025,1250.00,90853,F50.00,1000.00,900.00,Commercial,Paid,Anorexia group therapy,No,Closed,Approved
+TEST077,1077,2077,04/02/2025,38000.00,76700,R93.5,30000.00,28000.00,Medicare,Paid,Abdominal ultrasound,No,Closed,Approved
+TEST078,1078,2078,04/03/2025,125000.00,M0301,C78.7,0.00,0.00,Commercial,Denied,Experimental liver met,Yes,Denied,Denied
+TEST079,1079,2079,04/04/2025,195.00,88150,Z12.72,155.00,155.00,Commercial,Paid,Cervical cancer screen,No,Closed,Approved
+TEST080,1080,2080,04/05/2025,45000.00,81001,N39.0,36000.00,33000.00,Medicare,Paid,Urinalysis comprehensive,No,Closed,Approved
+TEST081,1081,2081,04/06/2025,6500.00,11755,Z42.8,0.00,0.00,Commercial,Denied,Cosmetic liposuction,No,Denied,Denied
+TEST082,1082,2082,04/07/2025,385.00,85025,D64.9,310.00,290.00,Commercial,Paid,Complete blood count,No,Closed,Approved
+TEST083,1083,2083,04/08/2025,72000.00,87086,N39.0,58000.00,53000.00,Medicare,Paid,Urine culture complex,No,Closed,Approved
+TEST084,1084,2084,04/09/2025,95000.00,C9752,C34.10,0.00,0.00,Commercial,Denied,Experimental lung cancer,Yes,Denied,Denied
+TEST085,1085,2085,04/10/2025,275.00,80053,E87.6,220.00,210.00,Commercial,Paid,Metabolic panel,No,Closed,Approved
+TEST086,1086,2086,04/11/2025,35000.00,36415,T81.4,28000.00,26000.00,Medicare,Paid,Venipuncture complex,No,Closed,Approved
+TEST087,1087,2087,04/12/2025,15000.00,27096,Z42.4,0.00,0.00,Commercial,Denied,Cosmetic calf implant,No,Denied,Denied
+TEST088,1088,2088,04/13/2025,520.00,71020,R91.8,420.00,390.00,Commercial,Paid,Chest X-ray abnormal,No,Closed,Approved
+TEST089,1089,2089,04/14/2025,85000.00,99291,R57.0,68000.00,63000.00,Medicare,Paid,Critical care,No,Closed,Approved
+TEST090,1090,2090,04/15/2025,175000.00,C9063,C92.6,0.00,0.00,Commercial,Denied,Experimental lymphoma,Yes,Denied,Denied
+TEST091,1091,2091,04/16/2025,165.00,99213,R73.09,130.00,125.00,Commercial,Paid,Prediabetes follow-up,No,Closed,Approved
+TEST092,1092,2092,04/17/2025,55000.00,90832,F84.0,44000.00,40000.00,Medicaid,Paid,Autism intensive therapy,No,Closed,Approved
+TEST093,1093,2093,04/18/2025,12000.00,14301,Z42.1,0.00,0.00,Commercial,Denied,Cosmetic rhinoplasty,No,Denied,Denied
+TEST094,1094,2094,04/19/2025,395.00,99214,F40.10,315.00,300.00,Commercial,Paid,Social phobia treatment,No,Closed,Approved
+TEST095,1095,2095,04/20/2025,68000.00,99292,R65.20,54000.00,50000.00,Medicare,Paid,Severe sepsis care,No,Closed,Approved
+TEST096,1096,2096,04/21/2025,135000.00,C9497,C78.6,0.00,0.00,Commercial,Denied,Experimental peritoneal,Yes,Denied,Denied
+TEST097,1097,2097,04/22/2025,225.00,99395,Z00.129,180.00,180.00,Medicaid,Paid,Child wellness exam,No,Closed,Approved
+TEST098,1098,2098,04/23/2025,42000.00,99293,J96.00,34000.00,31000.00,Commercial,Paid,Respiratory failure,No,Closed,Approved
+TEST099,1099,2099,04/24/2025,8500.00,25447,Z42.5,0.00,0.00,Commercial,Denied,Cosmetic thigh lift,No,Denied,Denied
+TEST100,1100,2100,04/25/2025,285.00,99215,G93.1,230.00,220.00,Medicare,Paid,Brain injury follow-up,No,Closed,Approved
