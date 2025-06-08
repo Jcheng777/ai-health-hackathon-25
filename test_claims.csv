@@ -1,0 +1,101 @@
+Claim ID,Provider ID,Patient ID,Date of Service,Billed Amount,Procedure Code,Diagnosis Code,Allowed Amount,Paid Amount,Insurance Type,Claim Status,Reason Code,Follow-up Required,AR Status,Outcome
+PLBNE9EBHN,4408479608,4942231828,04/14/2024,180,99213,A04.0,155,152,Commercial,Paid,Missing documentation,No,Closed,Paid
+K5298RGT82,3683465101,5334933888,07/12/2024,260,99282,A02.1,154,150,Medicaid,Paid,Experimental treatment,Yes,Open,Paid
+KNHYVAFHDK,8639957745,7228844088,12/01/2024,271,99238,J44.1,254,230,Commercial,Paid,Experimental treatment,No,Denied,Paid
+9SQAIL1YXI,7418675648,6802729514,11/15/2024,166,99213,I50.9,100,95,Medicare,Under Review,Patient eligibility issues,No,Partially Paid,Denied
+S6EQXXCX9K,3069175337,5582065665,07/17/2024,612,99222,A06.0,461,420,Medicare,Paid,Experimental treatment,Yes,Partially Paid,Paid
+YWR7MKGXUK,4775998622,8483541065,11/13/2024,490,99232,J44.1,372,352,Medicare,Paid,Experimental treatment,No,On Hold,Paid
+3GBJ72BTQ8,7879041172,8087928471,08/31/2024,145,99213,A05.0,64,58,Self-Pay,Under Review,Lack of medical necessity,No,Partially Paid,Paid
+HYEK8GVP80,6987375157,5524890290,12/21/2024,118,99213,J18.9,79,72,Medicaid,Paid,Duplicate claim,No,Partially Paid,Paid
+IJ57NBFB6T,1336601533,4202598575,02/11/2024,314,99215,F32.9,295,212,Commercial,Paid,Out of network provider,Yes,Partially Paid,Partially Paid
+A1QZVYM63Y,6032106324,4508279513,08/27/2024,525,99223,I10,346,295,Medicare,Paid,Duplicate claim,No,Closed,Paid
+JYGHPO1VGK,1656113555,3740532715,08/09/2024,454,99283,J44.1,376,351,Commercial,Paid,Service not covered,Yes,Denied,Paid
+G2QFPODPEH,0645785696,9741544955,12/21/2024,288,99238,E11.9,199,0,Medicare,Denied,Out of network provider,No,Pending,Denied
+PSL0JO4PYA,4821699144,4249248623,08/27/2024,441,99233,A03.3,280,250,Medicaid,Paid,Experimental treatment,Yes,Partially Paid,Paid
+NCKONRHHKY,0476163226,9729202355,10/30/2024,285,99232,F32.9,220,205,Medicare,Paid,Patient eligibility issues,Yes,Denied,Paid
+BJ2HU64NUN,7627202364,9439587903,11/08/2024,498,99223,F41.1,346,0,Medicare,Denied,Missing documentation,No,Pending,Denied
+ECKODY3GIV,0138336130,7488511445,04/29/2024,293,99232,A04.2,260,251,Commercial,Paid,Lack of medical necessity,No,Denied,Paid
+Y8F881EN69,9120745571,2717305708,09/08/2024,275,99231,A01.9,142,124,Self-Pay,Paid,Incorrect billing information,No,On Hold,Paid
+XFT91HVBOO,5932794631,3310688444,12/11/2024,447,99284,I25.10,301,174,Medicare,Paid,Authorization not obtained,No,Pending,Partially Paid
+JR78ICVLK6,5605109607,2075058226,07/28/2024,730,99284,A04.2,449,278,Medicaid,Paid,Incorrect billing information,No,Pending,Partially Paid
+SK0NLYDJIX,3955268085,1902096721,01/28/2024,347,99221,I10,265,0,Commercial,Denied,Experimental treatment,No,Denied,Denied
+UJ6SAFK9KK,6473189481,1980946320,06/10/2024,534,99222,I25.10,457,342,Commercial,Paid,Authorization not obtained,Yes,Closed,Partially Paid
+B2TV9QPIXQ,6317357460,2027542624,09/20/2024,195,99281,A07.8,154,94,Medicare,Paid,Authorization not obtained,No,Denied,Partially Paid
+XQQ0VBQ677,7384857777,3199784780,12/03/2024,305,99282,F43.10,189,171,Medicare,Paid,Service not covered,Yes,Denied,Paid
+3I1RD31TB0,8781937997,2529458960,08/12/2024,282,99238,A06.0,186,166,Medicare,Paid,Incorrect billing information,No,Closed,Paid
+EP4NXKV3MS,4064564704,6294524560,08/04/2024,392,99233,A09.9,305,298,Commercial,Paid,Lack of medical necessity,No,On Hold,Paid
+7MFCYLTM9R,9315458257,3295533942,07/16/2024,366,99215,I25.10,289,0,Medicare,Denied,Duplicate claim,No,Denied,Denied
+WUUCWJ5RE7,4416885634,0750051974,07/27/2024,333,99232,A03.3,217,202,Medicare,Paid,Incorrect billing information,No,Closed,Paid
+N7KBNKFVDH,3777793561,7699959675,03/03/2024,958,99285,F43.10,710,669,Medicare,Paid,Missing documentation,No,On Hold,Paid
+CCDMKUI8AY,3488704662,5324755204,08/05/2024,314,99238,E11.9,254,253,Commercial,Paid,Incorrect billing information,No,Partially Paid,Paid
+I6ATQGKRYT,8102370646,6035782109,05/10/2024,758,99284,A01.9,671,606,Commercial,Under Review,Missing documentation,No,Pending,Paid
+W9D2OLSG7D,8792505084,2857459781,10/29/2024,466,99221,A04.0,381,361,Commercial,Paid,Missing documentation,No,Pending,Paid
+U6ZU1TOZHD,5842753919,8825094056,05/20/2024,334,99215,A04.0,297,286,Commercial,Paid,Experimental treatment,Yes,On Hold,Paid
+YRKUORDGBS,6367423126,5517033478,06/07/2024,465,99223,F32.9,363,0,Commercial,Denied,Pre-existing condition,No,On Hold,Denied
+Q8SYO2HB57,3873098398,0558318002,04/10/2024,239,99214,J18.9,173,166,Medicaid,Paid,Experimental treatment,Yes,On Hold,Paid
+GI9MYUQ99P,6596911387,3194466022,02/26/2024,170,99214,A09.9,71,65,Self-Pay,Paid,Experimental treatment,Yes,Open,Paid
+1YTQYSAT77,9810476513,1967543330,11/25/2024,356,99231,A04.0,269,174,Commercial,Paid,Missing documentation,No,Closed,Partially Paid
+XNF99RSYMA,4890746182,7455626345,08/31/2024,248,99281,F41.1,208,185,Commercial,Paid,Incorrect billing information,No,Denied,Paid
+TNVFT4N47Z,5810072801,1883517587,09/02/2024,405,99221,F43.10,252,240,Medicare,Paid,Patient eligibility issues,Yes,On Hold,Paid
+I6MP27VD4Z,4044800211,0529876425,07/18/2024,226,99238,E11.65,201,175,Commercial,Under Review,Lack of medical necessity,Yes,Partially Paid,Denied
+C6TD37VIH7,2672676591,1214638416,03/02/2024,372,99282,J45.9,329,293,Commercial,Paid,Service not covered,Yes,Open,Paid
+GDV44CM63Z,8518367389,8620358594,01/30/2024,932,99285,A02.1,654,588,Medicare,Paid,Experimental treatment,No,On Hold,Paid
+51NQP7LYDC,8711377985,2903277672,09/07/2024,628,99222,A04.2,557,0,Commercial,Denied,Out of network provider,No,Partially Paid,Denied
+94DNMKZA3O,0879978972,8212776106,01/21/2024,202,99238,F43.10,124,0,Medicare,Denied,Out of network provider,Yes,Closed,Denied
+SOJUV0GYUB,3635642152,2814044532,06/18/2024,411,99232,A07.8,242,82,Medicaid,Under Review,Missing documentation,No,Pending,Partially Paid
+RDT5NHXF4T,9307778458,3564185961,04/09/2024,669,99223,E11.65,487,464,Medicare,Under Review,Lack of medical necessity,No,Closed,Denied
+770IGMLG9W,8999242394,7813687687,11/03/2024,420,99223,J44.1,388,0,Commercial,Denied,Experimental treatment,No,Open,Denied
+XACBTFQ8SK,2068138239,3866829369,04/08/2024,356,99215,A03.3,329,325,Commercial,Paid,Incorrect billing information,Yes,Closed,Paid
+6F5QX6GXNI,3229805759,4612223317,01/19/2024,470,99222,F32.9,345,143,Medicaid,Under Review,Out of network provider,No,On Hold,Partially Paid
+XXB6QPWARI,3255297722,1367237220,12/25/2024,253,99214,A01.9,228,222,Commercial,Paid,Lack of medical necessity,No,On Hold,Paid
+8DH0HX6Z8W,9306972416,3071834095,07/24/2024,236,99215,A03.3,142,140,Medicaid,Paid,Lack of medical necessity,No,Denied,Paid
+PYLLMKJ28D,2775480259,3534703623,12/22/2024,212,99281,A09.9,134,115,Medicaid,Paid,Missing documentation,Yes,Denied,Paid
+CFFNAM6CC0,7551500448,9205613978,08/15/2024,237,99238,A05.0,190,107,Commercial,Paid,Experimental treatment,No,Closed,Partially Paid
+V7K3D5OTW4,1468789442,6726898037,04/08/2024,219,99281,A04.2,192,132,Commercial,Paid,Pre-existing condition,Yes,On Hold,Partially Paid
+8R6ET9VG4O,3143092706,7468740244,05/22/2024,322,99231,E11.65,216,192,Medicaid,Paid,Incorrect billing information,No,Open,Paid
+HAPTD5G1Q7,3380928423,6323143869,09/22/2024,320,99221,A09.9,242,229,Medicare,Under Review,Duplicate claim,Yes,Partially Paid,Partially Paid
+W4SBXJ2DTA,8711784462,6837431328,05/30/2024,159,99213,A09.9,144,103,Commercial,Paid,Lack of medical necessity,No,On Hold,Partially Paid
+MSLZARFGX9,2755169130,1824130853,04/01/2024,354,99231,F43.10,249,0,Medicaid,Denied,Service not covered,No,Partially Paid,Denied
+X1Q8F6JNG7,3834014823,5547150345,05/02/2024,218,99282,A00.1,121,116,Medicaid,Paid,Authorization not obtained,No,Denied,Paid
+4X1JNUVLAT,6438477760,4170791364,03/04/2024,236,99282,J18.9,209,180,Commercial,Paid,Patient eligibility issues,No,Denied,Paid
+TP3Z4ROSFR,8919924236,9539987566,05/20/2024,137,99213,A00.1,103,94,Commercial,Paid,Authorization not obtained,Yes,Partially Paid,Paid
+D2UKQOGUF4,6246061889,6556302286,11/08/2024,420,99222,A03.3,259,223,Medicare,Under Review,Duplicate claim,No,Open,Paid
+N0QOHP7JMW,3701191493,3493262052,09/23/2024,423,99233,A07.8,270,0,Medicare,Denied,Lack of medical necessity,No,On Hold,Denied
+GP8EQ8C533,2271544596,5505296655,10/16/2024,509,99232,J44.1,366,361,Medicaid,Under Review,Authorization not obtained,Yes,Closed,Denied
+4EV701GGUC,6711061651,2272221662,07/06/2024,168,99213,A08.1,151,128,Commercial,Paid,Pre-existing condition,No,Closed,Partially Paid
+OJTPV60VAI,6850785715,4294894431,03/23/2024,139,99213,E11.65,107,77,Medicare,Paid,Missing documentation,Yes,Closed,Partially Paid
+H2ZXGZJSBP,4799754337,7618323844,03/26/2024,225,99214,F41.1,143,0,Medicare,Denied,Patient eligibility issues,No,Closed,Denied
+YIR9AZDWIJ,2921629649,2954517559,03/09/2024,454,99222,A04.1,267,247,Self-Pay,Paid,Incorrect billing information,No,Open,Paid
+W3S2RN6BMX,4422581355,8355200818,09/21/2024,218,99281,I50.9,155,140,Medicaid,Paid,Authorization not obtained,No,On Hold,Paid
+NA2RXDGZT2,9241740146,5294859278,02/23/2024,324,99215,J18.9,288,252,Commercial,Paid,Lack of medical necessity,No,Open,Paid
+JIYIADXQ26,2458774253,9982047882,09/21/2024,451,99223,J18.9,406,267,Commercial,Paid,Service not covered,Yes,Partially Paid,Partially Paid
+J2B3UB2RC0,2873465074,9704005170,12/23/2024,600,99233,E11.65,379,325,Medicare,Paid,Pre-existing condition,Yes,Open,Paid
+FTAXP0WFOY,8017539312,0566768635,09/17/2024,359,99215,F43.10,240,231,Medicare,Paid,Out of network provider,No,Open,Paid
+09DCNWMBXE,2749895865,5327767523,10/25/2024,125,99213,J44.1,86,0,Self-Pay,Denied,Patient eligibility issues,No,Pending,Denied
+X6QD0771HL,3947420146,3063934408,12/16/2024,516,99223,A08.1,321,315,Medicaid,Paid,Out of network provider,Yes,On Hold,Paid
+S1QP5XYAKJ,1100148577,8270457522,05/16/2024,279,99238,E11.65,231,209,Commercial,Under Review,Incorrect billing information,No,Pending,Paid
+RYQ3DE0AUB,2983500503,3968450740,09/29/2024,374,99282,A03.3,306,272,Commercial,Paid,Pre-existing condition,No,Pending,Paid
+XC609YZHS1,1675359142,7180673624,09/03/2024,248,99214,I50.9,201,191,Commercial,Paid,Service not covered,No,Denied,Paid
+9JNK5UXRJE,0499079803,6286697819,03/01/2024,478,99233,A06.0,327,315,Medicaid,Under Review,Lack of medical necessity,Yes,Pending,Paid
+MVZ8Z8H6CA,8356030713,6712273707,05/07/2024,518,99222,A04.1,228,212,Self-Pay,Paid,Service not covered,No,Denied,Paid
+81A6FMOSV0,8932142849,8330266912,07/05/2024,451,99223,F43.10,289,269,Medicare,Paid,Lack of medical necessity,No,Closed,Paid
+PKS82E2VR9,0737542300,0711735672,06/24/2024,228,99282,I25.10,179,105,Medicare,Paid,Patient eligibility issues,No,Partially Paid,Partially Paid
+PL68IUCSGL,0934285047,2411765365,12/07/2024,495,99232,A02.1,311,296,Medicare,Paid,Missing documentation,No,Denied,Paid
+D0HJFBAEJ9,5769635094,8815285607,06/27/2024,251,99214,A07.8,210,168,Commercial,Paid,Patient eligibility issues,No,Partially Paid,Partially Paid
+YPB9A30JIA,6091010253,8077073555,03/16/2024,529,99283,A08.1,317,282,Medicare,Paid,Service not covered,No,Open,Paid
+RR9FY5FF44,8846418753,4223616168,01/13/2024,599,99222,A04.2,357,0,Medicaid,Denied,Pre-existing condition,Yes,On Hold,Denied
+JEQBFMINDM,1948402311,3643698132,12/23/2024,462,99232,I25.10,433,248,Commercial,Paid,Experimental treatment,No,Open,Partially Paid
+ZRDDN7P29E,5484572144,0309532603,06/16/2024,235,99238,A01.9,166,165,Medicaid,Paid,Service not covered,Yes,Pending,Paid
+3TDV0IQF1G,8158262780,8746841632,09/07/2024,580,99233,A08.1,475,0,Commercial,Denied,Duplicate claim,Yes,Open,Denied
+R8JXYXN6OK,4502871678,9720846928,10/02/2024,625,99222,F43.10,550,536,Commercial,Paid,Incorrect billing information,Yes,Denied,Paid
+7GC7BFMO16,0207424587,4160548405,03/05/2024,184,99238,F32.9,139,97,Commercial,Paid,Out of network provider,Yes,Closed,Partially Paid
+IP12GNVEOE,7396973786,2630626406,05/17/2024,212,99214,I50.9,145,122,Medicaid,Paid,Authorization not obtained,No,Partially Paid,Partially Paid
+48JRPE2XN9,5612320853,4091822998,10/21/2024,348,99215,F43.10,328,307,Commercial,Paid,Duplicate claim,Yes,On Hold,Paid
+YMYRSVZN4R,1107024797,0998434240,07/13/2024,313,99215,I50.9,212,198,Self-Pay,Paid,Authorization not obtained,No,Partially Paid,Paid
+0ESCDCOWDX,0279524900,8469769324,04/01/2024,198,99281,A05.0,106,80,Self-Pay,Paid,Patient eligibility issues,Yes,On Hold,Partially Paid
+0S1G9EU818,5562657891,9879628477,05/08/2024,292,99238,A04.1,159,157,Self-Pay,Paid,Patient eligibility issues,Yes,On Hold,Paid
+ZQ8Q5TFEW7,3646800129,8916688600,08/03/2024,131,99213,A07.8,89,69,Medicaid,Paid,Pre-existing condition,No,Open,Partially Paid
+W5QZDO025D,5907248787,9903251578,04/11/2024,499,99283,F41.1,437,421,Commercial,Paid,Patient eligibility issues,No,Pending,Paid
+QP6FBDPA9N,9688018572,3021836727,02/13/2024,241,99231,A05.0,190,161,Commercial,Paid,Duplicate claim,No,Open,Paid
+K5IJULP98R,3941043946,5177253513,11/08/2024,355,99282,J44.1,282,249,Commercial,Paid,Patient eligibility issues,No,On Hold,Paid
+ORZPGU2HBI,2757455259,5774247628,01/17/2024,589,99284,I25.10,419,360,Medicare,Paid,Authorization not obtained,No,Partially Paid,Paid
