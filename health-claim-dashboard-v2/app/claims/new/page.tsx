@@ -16,14 +16,9 @@ import { toast } from "@/components/ui/use-toast"
 
 // Define insurance types
 const insuranceTypes = [
+  { value: "self_pay", label: "Self-Pay" },
   { value: "medicare", label: "Medicare" },
-  { value: "medicaid", label: "Medicaid" },
-  { value: "private", label: "Private Insurance" },
-  { value: "bluecross", label: "Blue Cross Blue Shield" },
-  { value: "aetna", label: "Aetna" },
-  { value: "cigna", label: "Cigna" },
-  { value: "uhc", label: "UnitedHealthcare" },
-  { value: "other", label: "Other" },
+  { value: "commercial", label: "Commercial" },
 ]
 
 // Define claim statuses
@@ -36,28 +31,18 @@ const claimStatuses = [
   { value: "appealed", label: "Appealed" },
 ]
 
-// Define outcomes
-const outcomes = [
-  { value: "paid", label: "Paid" },
-  { value: "partial", label: "Partially Paid" },
-  { value: "denied", label: "Denied" },
-  { value: "pending", label: "Pending Decision" },
-  { value: "appealing", label: "Under Appeal" },
-]
-
 export default function NewClaimPage() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Form state
   const [formData, setFormData] = useState({
-    paidAmount: "",
+    billedAmount: "",
     insuranceType: "",
-    claimStatus: "",
+    providerId: "",
     procedureCode: "",
     diagnosisCode: "",
-    reasonCode: "",
-    outcome: "",
+    dateOfService: "",
     notes: "",
   })
 
@@ -124,6 +109,21 @@ export default function NewClaimPage() {
                 {/* First row */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-2">
+                    <Label htmlFor="dateOfService">
+                      Date of Service <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="dateOfService"
+                      name="dateOfService"
+                      type="date"
+                      required
+                      value={formData.dateOfService}
+                      onChange={handleChange}
+                    />
+                    <p className="text-xs text-gray-500">Format: YYYY-MM-DD</p>
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="insuranceType">
                       Insurance Type <span className="text-red-500">*</span>
                     </Label>
@@ -139,25 +139,6 @@ export default function NewClaimPage() {
                         {insuranceTypes.map((type) => (
                           <SelectItem key={type.value} value={type.value}>
                             {type.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="claimStatus">Claim Status</Label>
-                    <Select
-                      value={formData.claimStatus}
-                      onValueChange={(value) => handleSelectChange("claimStatus", value)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select claim status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {claimStatuses.map((status) => (
-                          <SelectItem key={status.value} value={status.value}>
-                            {status.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -201,47 +182,33 @@ export default function NewClaimPage() {
                 {/* Third row */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="paidAmount">Paid Amount ($)</Label>
+                    <Label htmlFor="billedAmount">Billed Amount ($)</Label>
                     <Input
-                      id="paidAmount"
-                      name="paidAmount"
+                      id="billedAmount"
+                      name="billedAmount"
                       type="number"
                       step="0.01"
                       min="0"
                       placeholder="0.00"
-                      value={formData.paidAmount}
+                      value={formData.billedAmount}
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="reasonCode">Reason Code</Label>
+                    <Label htmlFor="providerId">
+                      Provider ID <span className="text-red-500">*</span>
+                    </Label>
                     <Input
-                      id="reasonCode"
-                      name="reasonCode"
-                      placeholder="e.g., CO-45"
-                      value={formData.reasonCode}
+                      id="providerId"
+                      name="providerId"
+                      placeholder="Enter provider ID"
+                      value={formData.providerId}
                       onChange={handleChange}
+                      required
                     />
-                    <p className="text-xs text-gray-500">Enter the reason code if applicable</p>
+                    <p className="text-xs text-gray-500">Enter the healthcare provider's ID</p>
                   </div>
-                </div>
-
-                {/* Fourth row */}
-                <div className="space-y-2">
-                  <Label htmlFor="outcome">Outcome</Label>
-                  <Select value={formData.outcome} onValueChange={(value) => handleSelectChange("outcome", value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select outcome" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {outcomes.map((outcome) => (
-                        <SelectItem key={outcome.value} value={outcome.value}>
-                          {outcome.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
                 </div>
               </div>
             </CardContent>
