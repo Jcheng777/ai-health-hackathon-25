@@ -111,6 +111,12 @@ export default function ClaimReviewPage() {
         );
 
       case "complete":
+        // Format prediction label
+        const formattedPrediction = prediction
+          ? prediction
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, (c) => c.toUpperCase())
+          : "";
         return (
           <div className="py-6">
             <div className="flex items-center justify-center mb-8">
@@ -133,7 +139,7 @@ export default function ClaimReviewPage() {
                   {prediction !== null && confidence !== null ? (
                     <div className="flex flex-col items-center justify-center">
                       <div className="mb-2 text-2xl font-bold">
-                        Prediction: {prediction}
+                        Prediction: {formattedPrediction}
                       </div>
                       <div className="flex h-36 w-36 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                         <span className="text-4xl font-bold">
@@ -154,14 +160,6 @@ export default function ClaimReviewPage() {
                                 <li key={idx}>{reason}</li>
                               ))}
                             </ul>
-                          </div>
-                        )}
-                        {analysisDetails && (
-                          <div className="mt-2">
-                            <strong>Analysis Details:</strong>
-                            <pre className="bg-gray-200 text-xs rounded p-2 mt-1 text-left">
-                              {JSON.stringify(analysisDetails, null, 2)}
-                            </pre>
                           </div>
                         )}
                       </div>

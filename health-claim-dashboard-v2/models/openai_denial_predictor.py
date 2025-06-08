@@ -982,6 +982,28 @@ class OpenAIDenialPredictor:
                 }
             }
 
+def format_denial_reasons(claim_data, denial_reasons):
+    # Check for missing codes
+    procedure_code = claim_data.get('procedure_code') or claim_data.get('Procedure Code')
+    diagnosis_code = claim_data.get('diagnosis_code') or claim_data.get('Diagnosis Code')
+    formatted = []
+    for reason in denial_reasons:
+        # Remove underscores and capitalize
+        if reason == "unknown_procedure":
+            formatted.append("Risk factor: Unknown procedure")
+        elif reason == "unknown_diagnosis":
+            formatted.append("Risk factor: Unknown diagnosis")
+        elif reason == "lack_of_documentation":
+            formatted.append("Risk factor: Lack of documentation")
+        elif "procedure and diagnosis codes are not provided" in reason:
+            if not procedure_code or not diagnosis_code:
+                formatted.append("The procedure and diagnosis codes are not provided, making it difficult to assess the clinical appropriateness.")
+            # else: skip this reason
+        else:
+            # Capitalize first letter, replace underscores with spaces
+            formatted.append(reason.replace("_", " ").capitalize())
+    return formatted
+
 def main():
     """Main function to test the OpenAI denial predictor"""
     print("🚀 OpenAI Healthcare Claim Denial Predictor")
@@ -1058,6 +1080,9 @@ if __name__ == "__main__":
         claim_data = json.loads(sys.argv[1])
         predictor = OpenAIDenialPredictor()
         result = predictor.get_denial_prediction_json(claim_data)
+        # Format denial reasons before output
+        if result.get('denial_reasons'):
+            result['denial_reasons'] = format_denial_reasons(claim_data, result['denial_reasons'])
         print("DEBUG: Prediction JSON to return:", json.dumps(result), file=sys.stderr)
         print(json.dumps(result))
     else:
