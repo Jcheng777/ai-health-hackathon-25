@@ -1,39 +1,40 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Loader2 } from "lucide-react"
-import { toast } from "@/components/ui/use-toast"
+import type React from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 // Define insurance types
 const insuranceTypes = [
   { value: "self_pay", label: "Self-Pay" },
   { value: "medicare", label: "Medicare" },
   { value: "commercial", label: "Commercial" },
-]
-
-// Define claim statuses
-const claimStatuses = [
-  { value: "submitted", label: "Submitted" },
-  { value: "in_process", label: "In Process" },
-  { value: "pending", label: "Pending" },
-  { value: "denied", label: "Denied" },
-  { value: "approved", label: "Approved" },
-  { value: "appealed", label: "Appealed" },
-]
+];
 
 export default function NewClaimPage() {
-  const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -44,44 +45,77 @@ export default function NewClaimPage() {
     diagnosisCode: "",
     dateOfService: "",
     notes: "",
-  })
+  });
 
   // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Handle select changes
   const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Basic validation
-    if (!formData.procedureCode || !formData.diagnosisCode || !formData.insuranceType) {
+    if (
+      !formData.procedureCode ||
+      !formData.diagnosisCode ||
+      !formData.insuranceType
+    ) {
       toast({
         title: "Missing required fields",
         description: "Please fill in all required fields",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // POST claim data (prediction is handled in backend)
+      const response = await fetch("/api/claims", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider_id: Number(formData.providerId),
+          procedure_code: formData.procedureCode,
+          diagnosis_code: formData.diagnosisCode,
+          billed_amount: formData.billedAmount
+            ? Number(formData.billedAmount)
+            : null,
+          insurance_type: formData.insuranceType,
+          additional_info: formData.notes,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit claim");
+      }
+
+      const result = await response.json();
+      // Pass prediction in query param (base64-encoded)
+      const predictionStr = encodeURIComponent(
+        btoa(JSON.stringify(result.prediction))
+      );
+      router.push(`/claims/review?prediction=${predictionStr}`);
+    } catch (error) {
       toast({
-        title: "Claim submitted",
-        description: "Your claim has been submitted for AI review",
-      })
-      router.push("/claims/review")
-    }, 1500)
-  }
+        title: "Submission failed",
+        description: "There was an error submitting your claim.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -102,7 +136,9 @@ export default function NewClaimPage() {
           <Card>
             <CardHeader>
               <CardTitle>Claim Details</CardTitle>
-              <CardDescription>Enter the specific information about this insurance claim</CardDescription>
+              <CardDescription>
+                Enter the specific information about this insurance claim
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6">
@@ -129,7 +165,9 @@ export default function NewClaimPage() {
                     </Label>
                     <Select
                       value={formData.insuranceType}
-                      onValueChange={(value) => handleSelectChange("insuranceType", value)}
+                      onValueChange={(value) =>
+                        handleSelectChange("insuranceType", value)
+                      }
                       required
                     >
                       <SelectTrigger>
@@ -150,7 +188,8 @@ export default function NewClaimPage() {
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="procedureCode">
-                      Procedure Code (CPT/HCPCS) <span className="text-red-500">*</span>
+                      Procedure Code (CPT/HCPCS){" "}
+                      <span className="text-red-500">*</span>
                     </Label>
                     <Input
                       id="procedureCode"
@@ -160,12 +199,15 @@ export default function NewClaimPage() {
                       onChange={handleChange}
                       required
                     />
-                    <p className="text-xs text-gray-500">Enter the CPT or HCPCS code for the procedure</p>
+                    <p className="text-xs text-gray-500">
+                      Enter the CPT or HCPCS code for the procedure
+                    </p>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="diagnosisCode">
-                      Diagnosis Code (ICD-10) <span className="text-red-500">*</span>
+                      Diagnosis Code (ICD-10){" "}
+                      <span className="text-red-500">*</span>
                     </Label>
                     <Input
                       id="diagnosisCode"
@@ -175,7 +217,9 @@ export default function NewClaimPage() {
                       onChange={handleChange}
                       required
                     />
-                    <p className="text-xs text-gray-500">Enter the ICD-10 diagnosis code</p>
+                    <p className="text-xs text-gray-500">
+                      Enter the ICD-10 diagnosis code
+                    </p>
                   </div>
                 </div>
 
@@ -207,7 +251,9 @@ export default function NewClaimPage() {
                       onChange={handleChange}
                       required
                     />
-                    <p className="text-xs text-gray-500">Enter the healthcare provider's ID</p>
+                    <p className="text-xs text-gray-500">
+                      Enter the healthcare provider's ID
+                    </p>
                   </div>
                 </div>
               </div>
@@ -219,7 +265,8 @@ export default function NewClaimPage() {
             <CardHeader>
               <CardTitle>Additional Notes</CardTitle>
               <CardDescription>
-                Add any context, special circumstances, or additional information about this claim
+                Add any context, special circumstances, or additional
+                information about this claim
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -233,7 +280,8 @@ export default function NewClaimPage() {
                   onChange={handleChange}
                 />
                 <p className="text-xs text-gray-500">
-                  Optional: Include any relevant context that might help with the claim review
+                  Optional: Include any relevant context that might help with
+                  the claim review
                 </p>
               </div>
             </CardContent>
@@ -258,5 +306,5 @@ export default function NewClaimPage() {
         </form>
       </div>
     </div>
-  )
+  );
 }

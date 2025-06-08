@@ -19,6 +19,9 @@ import openai
 from openai import OpenAI
 import time
 import warnings
+import sys
+from dotenv import load_dotenv
+load_dotenv(dotenv_path='/full/path/to/.env.local')
 warnings.filterwarnings('ignore')
 
 class OpenAIDenialPredictor:
@@ -1051,4 +1054,12 @@ def main():
     print(f"📈 Performance Metrics: {predictor.performance_metrics}")
 
 if __name__ == "__main__":
-    main() 
+    if len(sys.argv) > 1:
+        claim_data = json.loads(sys.argv[1])
+        predictor = OpenAIDenialPredictor()
+        result = predictor.get_denial_prediction_json(claim_data)
+        print("DEBUG: Prediction JSON to return:", json.dumps(result), file=sys.stderr)
+        print(json.dumps(result))
+    else:
+        # Optionally, you can call your main() for CLI/testing
+        main() 
