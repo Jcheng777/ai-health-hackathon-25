@@ -1,56 +1,56 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { ArrowLeft, CheckCircle, Clock, Loader2 } from "lucide-react"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { ArrowLeft, CheckCircle, Clock, Loader2 } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
-type ReviewStatus = "pending" | "analyzing" | "complete"
+type ReviewStatus = "pending" | "analyzing" | "complete";
 
 export default function ClaimReviewPage() {
-  const [status, setStatus] = useState<ReviewStatus>("pending")
-  const [progress, setProgress] = useState(0)
-  const [riskScore, setRiskScore] = useState<number | null>(null)
-  const [recommendations, setRecommendations] = useState<string[]>([])
+  const [status, setStatus] = useState<ReviewStatus>("pending");
+  const [progress, setProgress] = useState(0);
+  const [riskScore, setRiskScore] = useState<number | null>(null);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [prediction, setPrediction] = useState<string | null>(null);
+  const [confidence, setConfidence] = useState<number | null>(null);
 
   // Simulate the AI review process
   useEffect(() => {
     const simulateReview = async () => {
-      // Start with pending status
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // Move to analyzing status
-      setStatus("analyzing")
-
-      // Simulate progress updates
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setStatus("analyzing");
       const interval = setInterval(() => {
         setProgress((prev) => {
-          const newProgress = prev + Math.random() * 15
-          return newProgress >= 100 ? 100 : newProgress
-        })
-      }, 600)
-
-      // Complete after some time
-      await new Promise((resolve) => setTimeout(resolve, 5000))
-      clearInterval(interval)
-      setProgress(100)
-
-      // Set final results
-      setStatus("complete")
-      setRiskScore(42)
-      setRecommendations([
-        "Include more specific diagnosis codes (ICD-10)",
-        "Add documentation for medical necessity",
-        "Verify CPT code matches the procedure description",
-        "Include prior authorization reference number",
-      ])
-    }
-
-    simulateReview()
-  }, [])
+          const newProgress = prev + Math.random() * 15;
+          return newProgress >= 100 ? 100 : newProgress;
+        });
+      }, 600);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      clearInterval(interval);
+      setProgress(100);
+      setStatus("complete");
+      // Read prediction/confidence from router state
+      // @ts-ignore
+      if (window.history.state && window.history.state.usr) {
+        // @ts-ignore
+        setPrediction(window.history.state.usr.prediction ?? null);
+        // @ts-ignore
+        setConfidence(window.history.state.usr.confidence ?? null);
+      }
+    };
+    simulateReview();
+  }, []);
 
   const renderStatusContent = () => {
     switch (status) {
@@ -58,26 +58,36 @@ export default function ClaimReviewPage() {
         return (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Clock className="h-16 w-16 text-gray-400 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-200">Preparing Review</h2>
-            <p className="text-gray-400 mt-2">Your claim is in the queue for AI analysis</p>
+            <h2 className="text-xl font-semibold text-gray-200">
+              Preparing Review
+            </h2>
+            <p className="text-gray-400 mt-2">
+              Your claim is in the queue for AI analysis
+            </p>
             <div className="mt-6">
               <Loader2 className="h-8 w-8 animate-spin text-blue-400 mx-auto" />
             </div>
           </div>
-        )
+        );
 
       case "analyzing":
         return (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <Loader2 className="h-16 w-16 text-blue-400 mb-4 animate-spin" />
-            <h2 className="text-xl font-semibold text-gray-200">Analyzing Claim</h2>
-            <p className="text-gray-400 mt-2">Our AI is reviewing your claim details</p>
+            <h2 className="text-xl font-semibold text-gray-200">
+              Analyzing Claim
+            </h2>
+            <p className="text-gray-400 mt-2">
+              Our AI is reviewing your claim details
+            </p>
             <div className="w-full max-w-md mt-6">
               <Progress value={progress} className="h-2" />
-              <p className="text-sm text-gray-400 mt-2">{Math.round(progress)}% complete</p>
+              <p className="text-sm text-gray-400 mt-2">
+                {Math.round(progress)}% complete
+              </p>
             </div>
           </div>
-        )
+        );
 
       case "complete":
         return (
@@ -85,7 +95,9 @@ export default function ClaimReviewPage() {
             <div className="flex items-center justify-center mb-8">
               <CheckCircle className="h-12 w-12 text-green-400 mr-4" />
               <div>
-                <h2 className="text-xl font-semibold text-gray-200">Analysis Complete</h2>
+                <h2 className="text-xl font-semibold text-gray-200">
+                  Analysis Complete
+                </h2>
                 <p className="text-gray-400">Review finished on June 7, 2025</p>
               </div>
             </div>
@@ -93,35 +105,31 @@ export default function ClaimReviewPage() {
             <div className="grid gap-6 md:grid-cols-2">
               <Card>
                 <CardHeader>
-                  <CardTitle>Deny Risk Score</CardTitle>
+                  <CardTitle>AI Denial Prediction</CardTitle>
                   <CardDescription>Likelihood of claim denial</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-center">
-                    <div
-                      className={`
-                      flex h-36 w-36 items-center justify-center rounded-full 
-                      ${
-                        riskScore! < 30
-                          ? "bg-green-100 text-green-700"
-                          : riskScore! < 70
-                            ? "bg-amber-100 text-amber-700"
-                            : "bg-red-100 text-red-700"
-                      }
-                    `}
-                    >
-                      <span className="text-4xl font-bold">{riskScore}%</span>
+                  {prediction !== null && confidence !== null ? (
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="mb-2 text-2xl font-bold">
+                        Prediction: {prediction}
+                      </div>
+                      <div className="flex h-36 w-36 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+                        <span className="text-4xl font-bold">
+                          {(confidence * 100).toFixed(1)}%
+                        </span>
+                      </div>
+                      <div className="mt-4 text-center">
+                        <p className="text-sm font-medium">
+                          Confidence in prediction
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-sm font-medium">
-                      {riskScore! < 30
-                        ? "Low risk of denial"
-                        : riskScore! < 70
-                          ? "Moderate risk of denial"
-                          : "High risk of denial"}
-                    </p>
-                  </div>
+                  ) : (
+                    <div className="text-center text-gray-500">
+                      No prediction available.
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
@@ -146,7 +154,8 @@ export default function ClaimReviewPage() {
             <Alert className="mt-6 bg-blue-950/50 border-blue-800">
               <AlertTitle className="text-blue-300">Next Steps</AlertTitle>
               <AlertDescription className="text-gray-300">
-                Review the recommendations and update your claim before final submission to the insurance provider.
+                Review the recommendations and update your claim before final
+                submission to the insurance provider.
               </AlertDescription>
             </Alert>
 
@@ -155,9 +164,9 @@ export default function ClaimReviewPage() {
               <Button>Submit to Insurance</Button>
             </div>
           </div>
-        )
+        );
     }
-  }
+  };
 
   return (
     <div className="container mx-auto max-w-3xl py-8">
@@ -169,10 +178,12 @@ export default function ClaimReviewPage() {
           </Link>
         </Button>
         <h1 className="text-2xl font-bold text-white">Claim Review</h1>
-        <p className="text-gray-400">Claim ID: CL-1235 • Submitted on June 7, 2025</p>
+        <p className="text-gray-400">
+          Claim ID: CL-1235 • Submitted on June 7, 2025
+        </p>
       </div>
 
       <Card>{renderStatusContent()}</Card>
     </div>
-  )
+  );
 }

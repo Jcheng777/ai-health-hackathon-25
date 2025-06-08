@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { spawn } from 'child_process'
 import path from 'path'
+import { neon } from '@neondatabase/serverless'
+import { drizzle } from 'drizzle-orm/neon-http'
+import * as schema from './schema'
+import { db } from '@/lib/db'
+import { claims } from '@/lib/db/schema'
 
 interface ClaimData {
   procedureCode: string
@@ -21,6 +26,9 @@ interface PredictionResult {
   riskFactors: string[]
 }
 
+const sql = neon(process.env.DATABASE_URL!)
+export const db = drizzle(sql, { schema })
+
 export async function POST(request: NextRequest) {
   try {
     const claimData: ClaimData = await request.json()
@@ -36,14 +44,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Try Python prediction script first, fallback to rule-based
-    let prediction: PredictionResult
-    try {
-      prediction = await runPredictionModel(claimData)
-    } catch (mlError) {
-      console.warn('ML prediction failed, using rule-based fallback:', mlError)
-      prediction = getRuleBasedPrediction(claimData)
-    }
+    // Only use Python prediction model
+    const prediction = await runPredictionModel(claimData)
+
+    const result = await db.insert(claims).values({
+      // ...fields
+    }).returning()
 
     return NextResponse.json(prediction)
   } catch (error) {
@@ -92,60 +98,4 @@ function runPredictionModel(claimData: ClaimData): Promise<PredictionResult> {
       reject(new Error(`Failed to start Python process: ${error.message}`))
     })
   })
-}
-
-// Fallback rule-based prediction if ML model is unavailable
-function getRuleBasedPrediction(claimData: ClaimData): PredictionResult {
-  const riskFactors: string[] = []
-  let riskScore = 0
-
-  // Rule 1: High amount claims are more likely to be reviewed
-  if (claimData.billedAmount > 500) {
-    riskFactors.push('High billed amount (>$500)')
-    riskScore += 0.3
-  }
-
-  // Rule 2: Certain procedure codes have higher denial rates
-  const highRiskProcedures = ['99238', '99233', '99232']
-  if (highRiskProcedures.includes(claimData.procedureCode)) {
-    riskFactors.push('High-risk procedure code')
-    riskScore += 0.4
-  }
-
-  // Rule 3: Insurance type affects approval
-  if (claimData.insuranceType === 'Self-Pay') {
-    riskFactors.push('Self-pay insurance type')
-    riskScore += 0.2
-  }
-
-  // Rule 4: Large discrepancy between billed and allowed
-  if (claimData.allowedAmount && claimData.billedAmount) {
-    const discrepancy = (claimData.billedAmount - claimData.allowedAmount) / claimData.billedAmount
-    if (discrepancy > 0.3) {
-      riskFactors.push('Large discrepancy between billed and allowed amounts')
-      riskScore += 0.3
-    }
-  }
-
-  // Determine prediction based on risk score
-  let prediction: 'approved' | 'denied' | 'review'
-  let reasoning: string[]
-
-  if (riskScore >= 0.7) {
-    prediction = 'denied'
-    reasoning = ['High risk score indicates likely denial', ...riskFactors]
-  } else if (riskScore >= 0.4) {
-    prediction = 'review'
-    reasoning = ['Medium risk score suggests manual review needed', ...riskFactors]
-  } else {
-    prediction = 'approved'
-    reasoning = ['Low risk score indicates likely approval']
-  }
-
-  return {
-    prediction,
-    confidence: Math.min(0.85, 0.5 + riskScore), // Cap confidence for rule-based
-    reasoning,
-    riskFactors
-  }
 } 
