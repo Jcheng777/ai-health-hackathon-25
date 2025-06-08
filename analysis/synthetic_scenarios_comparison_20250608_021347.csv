@@ -1,0 +1,27 @@
+Scenario,Expected,Predicted,Confidence,Correct,Model
+Emergency care for acute MI,APPROVED,APPROVED,0.865,True,ClinicalBERT + OpenAI
+High complexity emergency for COPD exacerbation,APPROVED,APPROVED,0.865,True,ClinicalBERT + OpenAI
+Annual preventive exam adult,APPROVED,APPROVED,0.905,True,ClinicalBERT + OpenAI
+Screening mammography,APPROVED,APPROVED,0.905,True,ClinicalBERT + OpenAI
+Psychotherapy for major depression,APPROVED,APPROVED,0.63,True,ClinicalBERT + OpenAI
+Extended psychotherapy recurrent depression,APPROVED,APPROVED,0.63,True,ClinicalBERT + OpenAI
+Total knee replacement for osteoarthritis,APPROVED,DENIED,0.4462135922330096,False,ClinicalBERT + OpenAI
+Coronary artery bypass surgery,APPROVED,DENIED,0.39111650485436883,False,ClinicalBERT + OpenAI
+Office visit for diabetes management,APPROVED,DENIED,0.46499999999999997,False,ClinicalBERT + OpenAI
+Complex office visit for heart failure,APPROVED,DENIED,0.46499999999999997,False,ClinicalBERT + OpenAI
+Excessive billing for routine follow-up,DENIED,DENIED,0.46499999999999997,True,ClinicalBERT + OpenAI
+Elective surgery with poor necessity,DENIED,DENIED,0.3887378640776698,True,ClinicalBERT + OpenAI
+Excessive billing for minor complaint,DENIED,DENIED,0.46499999999999997,True,ClinicalBERT + OpenAI
+Emergency care for acute MI,APPROVED,APPROVED,0.30000000000000004,True,Traditional ML + OpenAI
+High complexity emergency for COPD exacerbation,APPROVED,APPROVED,0.5,True,Traditional ML + OpenAI
+Annual preventive exam adult,APPROVED,APPROVED,0.5,True,Traditional ML + OpenAI
+Screening mammography,APPROVED,APPROVED,0.7000000000000001,True,Traditional ML + OpenAI
+Psychotherapy for major depression,APPROVED,APPROVED,0.5,True,Traditional ML + OpenAI
+Extended psychotherapy recurrent depression,APPROVED,APPROVED,0.7000000000000001,True,Traditional ML + OpenAI
+Total knee replacement for osteoarthritis,APPROVED,APPROVED,0.09999999999999998,True,Traditional ML + OpenAI
+Coronary artery bypass surgery,APPROVED,DENIED,0.10000000000000009,False,Traditional ML + OpenAI
+Office visit for diabetes management,APPROVED,APPROVED,0.5,True,Traditional ML + OpenAI
+Complex office visit for heart failure,APPROVED,APPROVED,0.7000000000000001,True,Traditional ML + OpenAI
+Excessive billing for routine follow-up,DENIED,APPROVED,0.30000000000000004,False,Traditional ML + OpenAI
+Elective surgery with poor necessity,DENIED,APPROVED,0.0,False,Traditional ML + OpenAI
+Excessive billing for minor complaint,DENIED,APPROVED,0.30000000000000004,False,Traditional ML + OpenAI
