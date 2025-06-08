@@ -1,6 +1,13 @@
-# 🏥 Healthcare AI - Claim Denial Prediction
+# 🏥 ClaimAssist - Claim Denial Prediction
 
-**AI Health Hackathon 2025** | Advanced Clinical AI for Healthcare Claims
+**AI Health Hackathon 2025** | 
+
+## Problem 
+
+Healthcare claim denials cost the US healthcare system $20.5 - 25.7 billion annually, causing stress for patients and administrative burden for providers. We witnessed families struggling with unexpected claim denials, forcing them to choose between medical care and financial stability. 
+
+Our team was inspired to create an AI system that could predict claim outcomes before submission, giving patients and providers transparency and control over their healthcare decisions. Right after the physician's notes and EHR submissions, our model is able to predict whether the claim is likely to go through or if it requires more paperwork and what exactly that work would be!
+
 
 ## 🚀 What This Does
 
@@ -244,23 +251,15 @@ python create_visualizations.py
 python comprehensive_ai_comparison.py
 ```
 
-### For Data Scientists
+### Metrics
 - **Feature Engineering**: 8 optimized features
 - **Ensemble Learning**: Multi-modal AI architecture
 - **Clinical Knowledge**: MIMIC-III medical database
 - **Evaluation Metrics**: Accuracy, F1-score, clinical relevance
 
-## 🚀 Next Steps
 
-1. **🎮 Try the Demo**: `python clinical_ai_demo.py`
-2. **📊 See Charts**: Check `visualizations/` folder
-3. **🔧 Customize**: Modify models for your specific needs
-4. **🚀 Deploy**: Production-ready API integration
+## Questions, Concerns, Comments?
 
-## 📞 Need Help?
-
-- 📖 **Full docs**: Check `analysis/` folder
-- 🐛 **Issues**: Create GitHub issue  
-- 💡 **Ideas**: Open discussion
+Do not hesitate to reach out to us or open an issue! We would love to chat more about the solution we created.
 
 ---
