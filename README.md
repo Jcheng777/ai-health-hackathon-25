@@ -1,6 +1,6 @@
 # 🏥 ClaimAssist - Claim Denial Prediction
 
-**AI Health Hackathon 2025** | 
+**AI Health Hackathon 2025**
 
 ## Problem 
 
@@ -9,9 +9,13 @@ Healthcare claim denials cost the US healthcare system $20.5 - 25.7 billion annu
 Our team was inspired to create an AI system that could predict claim outcomes before submission, giving patients and providers transparency and control over their healthcare decisions. Right after the physician's notes and EHR submissions, our model is able to predict whether the claim is likely to go through or if it requires more paperwork and what exactly that work would be!
 
 
-## 🚀 What This Does
+## Insights
 
-Predicts whether healthcare insurance claims will be **approved** or **denied** using advanced AI models. Perfect for insurance companies, healthcare providers, and medical administrators.
+What if we could know whether healthcare insurance claims will be **approved** or **denied** even before the healthcare provider/patient submits the claim? 
+
+## Solution
+
+We use multi-modal ensemble AI combining ClinicalBERT (medical knowledge), OpenAI GPT-4 (clinical reasoning), traditional ML (reliability), and rule-based guidelines (compliance) to deliver the most accurate healthcare claim predictions available. Perfect for insurance companies, healthcare providers, and medical administrators who need transparent, explainable AI decisions with real-time processing capabilities.
 
 ## 🎯 Models & Performance
 
@@ -53,7 +57,7 @@ Our **ClinicalBERT + OpenAI** model provides:
 ```
 🤖 CLINICAL AI ASSESSMENT:
    🎯 Prediction: APPROVED
-   📊 Confidence: 87.5%
+   📊 Confidence: 87.5% (3500/4000)
    🏥 Medical Necessity: Medium
 
 🧠 CLINICAL REASONING:
