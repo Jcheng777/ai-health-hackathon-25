@@ -1,5 +1,7 @@
 # 🏥 ClaimAssist - Claim Denial Prediction
 
+Winner of the Healthcare x AI Hackathon under the legacy healthcare track
+
 **AI Health Hackathon 2025**
 
 ## Problem 
