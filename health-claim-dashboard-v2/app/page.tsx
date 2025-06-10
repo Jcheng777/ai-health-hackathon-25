@@ -1,7 +1,13 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, BarChart3, FileText, Home, Settings } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ArrowRight, BarChart3, FileText, Home, Settings } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -21,7 +27,10 @@ export default function HomePage() {
             <Home className="h-5 w-5" />
             Dashboard
           </Link>
-          <Link href="/claims" className="flex items-center gap-3 rounded-md px-3 py-2 text-gray-300 hover:bg-gray-700">
+          <Link
+            href="/claims"
+            className="flex items-center gap-3 rounded-md px-3 py-2 text-gray-300 hover:bg-gray-700"
+          >
             <FileText className="h-5 w-5" />
             Claims
           </Link>
@@ -38,15 +47,21 @@ export default function HomePage() {
       {/* Main content */}
       <main className="flex-1 p-6">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-white">Welcome back, Dr. Smith</h1>
-          <p className="text-gray-400">Submit and review your insurance claims</p>
+          <h1 className="text-2xl font-bold text-white">
+            Welcome back, Dr. Smith
+          </h1>
+          <p className="text-gray-400">
+            Submit and review your insurance claims
+          </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader className="pb-2">
               <CardTitle>New Claim</CardTitle>
-              <CardDescription>Submit a new claim for AI review</CardDescription>
+              <CardDescription>
+                Submit a new claim for AI review
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Button asChild className="w-full">
@@ -80,7 +95,9 @@ export default function HomePage() {
           </Card>
         </div>
 
-        <h2 className="mt-10 mb-4 text-xl font-semibold text-white">Recent Claims</h2>
+        <h2 className="mt-10 mb-4 text-xl font-semibold text-white">
+          Recent Claims
+        </h2>
         <div className="rounded-lg border border-gray-700 bg-gray-800">
           <div className="p-4">
             <table className="w-full">
@@ -145,5 +162,5 @@ export default function HomePage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

@@ -7,7 +7,7 @@ import path from 'path';
 
 async function runPythonPrediction(claimData: any) {
   return new Promise((resolve, reject) => {
-    const scriptPath = path.join(process.cwd(), 'models', 'openai_denial_predictor.py');
+    const scriptPath = path.join(process.cwd(), 'models', 'single_model_openai_denial_predictor.py');
     const python = spawn('python3', [scriptPath, JSON.stringify(claimData), '--json']);
     let output = '';
     let error = '';

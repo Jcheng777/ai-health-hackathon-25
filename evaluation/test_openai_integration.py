@@ -4,7 +4,7 @@ Test OpenAI Integration for Healthcare Claim Denial Prediction
 """
 
 import os
-from openai_denial_predictor import OpenAIDenialPredictor
+from single_model_openai_denial_predictor import SingleModelOpenAIDenialPredictor
 import pandas as pd
 
 def test_openai_integration():
@@ -17,10 +17,10 @@ def test_openai_integration():
     api_key = input("Enter your OpenAI API key (or press Enter to skip): ").strip()
     if not api_key:
         print("⚠️ No API key provided. Testing traditional model only.")
-        predictor = OpenAIDenialPredictor()
+        predictor = SingleModelOpenAIDenialPredictor()
     else:
         os.environ['OPENAI_API_KEY'] = api_key
-        predictor = OpenAIDenialPredictor(api_key)
+        predictor = SingleModelOpenAIDenialPredictor(api_key)
         print("✅ OpenAI API key configured")
     
     # Load training data

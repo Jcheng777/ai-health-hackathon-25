@@ -29,6 +29,7 @@ export default function ClaimReviewPage() {
   const [denialReasons, setDenialReasons] = useState<string[] | null>(null);
   const [nextSteps, setNextSteps] = useState<string[] | null>(null);
   const [analysisDetails, setAnalysisDetails] = useState<any>(null);
+  const [acceptedReasons, setAcceptedReasons] = useState<string[] | null>(null);
 
   useEffect(() => {
     const predictionParam = searchParams.get("prediction");
@@ -38,14 +39,19 @@ export default function ClaimReviewPage() {
         const predictionJson = JSON.parse(decoded);
         setPrediction(predictionJson.prediction ?? null);
         setConfidence(
-          predictionJson.confidence_score
-            ? predictionJson.confidence_score / 100
+          predictionJson.confidence_percent !== undefined
+            ? predictionJson.confidence_percent
             : null
         );
-        setLikelihoodPercent(predictionJson.likelihood_percent ?? null);
+        setLikelihoodPercent(
+          predictionJson.likelihood_percent !== undefined
+            ? predictionJson.likelihood_percent
+            : null
+        );
         setDenialReasons(predictionJson.denial_reasons ?? null);
         setNextSteps(predictionJson.next_steps ?? null);
         setAnalysisDetails(predictionJson.analysis_details ?? null);
+        setAcceptedReasons(predictionJson.accepted_reasons ?? null);
         setStatus("complete");
         setProgress(100);
       } catch (e) {
@@ -133,35 +139,71 @@ export default function ClaimReviewPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>AI Denial Prediction</CardTitle>
-                  <CardDescription>Likelihood of claim denial</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {prediction !== null && confidence !== null ? (
+                  {typeof prediction === "string" &&
+                  (confidence !== null || likelihoodPercent !== null) ? (
                     <div className="flex flex-col items-center justify-center">
                       <div className="mb-2 text-2xl font-bold">
                         Prediction: {formattedPrediction}
                       </div>
                       <div className="flex h-36 w-36 items-center justify-center rounded-full bg-blue-100 text-blue-700">
                         <span className="text-4xl font-bold">
-                          {likelihoodPercent !== null
+                          {prediction === "accepted" && confidence !== null
+                            ? `${confidence}%`
+                            : prediction === "denied" &&
+                              likelihoodPercent !== null
                             ? `${likelihoodPercent}%`
-                            : `${(confidence * 100).toFixed(1)}%`}
+                            : ""}
                         </span>
                       </div>
                       <div className="mt-4 text-center">
                         <p className="text-sm font-medium">
-                          Confidence in prediction
+                          {prediction === "accepted" && confidence !== null
+                            ? "Likelihood of acceptance"
+                            : prediction === "denied" &&
+                              likelihoodPercent !== null
+                            ? "Likelihood of denial"
+                            : ""}
                         </p>
-                        {denialReasons && denialReasons.length > 0 && (
-                          <div className="mt-2">
-                            <strong>Denial Reasons:</strong>
-                            <ul className="list-disc ml-6">
-                              {denialReasons.map((reason, idx) => (
-                                <li key={idx}>{reason}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
+                        {prediction === "accepted" &&
+                          acceptedReasons &&
+                          acceptedReasons.length > 0 && (
+                            <div className="mt-2">
+                              <strong>Accepted Reasons:</strong>
+                              <ul className="space-y-2">
+                                {acceptedReasons.map((reason, idx) => (
+                                  <li key={idx} className="flex items-start">
+                                    <span className="mr-2 mt-0.5 text-blue-400">
+                                      •
+                                    </span>
+                                    <span className="text-gray-200">
+                                      {reason}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        {prediction === "denied" &&
+                          denialReasons &&
+                          denialReasons.length > 0 && (
+                            <div className="mt-2">
+                              <strong>Denial Reasons:</strong>
+                              <ul className="space-y-2">
+                                {denialReasons.map((reason, idx) => (
+                                  <li key={idx} className="flex items-start">
+                                    <span className="mr-2 mt-0.5 text-blue-400">
+                                      •
+                                    </span>
+                                    <span className="text-gray-200">
+                                      {reason}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                       </div>
                     </div>
                   ) : (
@@ -174,7 +216,7 @@ export default function ClaimReviewPage() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Recommendations / Next Steps</CardTitle>
+                  <CardTitle>Recommendations</CardTitle>
                   <CardDescription>Suggested improvements</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -206,7 +248,7 @@ export default function ClaimReviewPage() {
 
             <div className="mt-6 flex justify-end space-x-4">
               <Button variant="outline">Edit Claim</Button>
-              <Button>Submit to Insurance</Button>
+              <Button>Save Claim</Button>
             </div>
           </div>
         );
