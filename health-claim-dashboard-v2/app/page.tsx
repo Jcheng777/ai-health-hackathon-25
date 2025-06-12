@@ -8,8 +8,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight, BarChart3, FileText, Home, Settings } from "lucide-react";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch real claims from the backend
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/claims`, { cache: 'no-store' });
+  let claims: any[] = [];
+  if (res.ok) {
+    const json = await res.json();
+    claims = json.data || [];
+  }
+
   return (
     <div className="flex min-h-screen bg-gray-900">
       {/* Sidebar */}
@@ -104,58 +114,40 @@ export default function HomePage() {
               <thead>
                 <tr className="border-b border-gray-700 text-sm text-gray-400">
                   <th className="pb-3 text-left font-medium">ID</th>
-                  <th className="pb-3 text-left font-medium">Date</th>
+                  <th className="pb-3 text-left font-medium">Provider ID</th>
                   <th className="pb-3 text-left font-medium">Status</th>
                   <th className="pb-3 text-left font-medium">Risk Score</th>
                   <th className="pb-3 text-right font-medium">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-700">
-                  <td className="py-3 text-white">CL-1234</td>
-                  <td className="py-3 text-gray-300">Jun 5, 2025</td>
-                  <td className="py-3">
-                    <span className="rounded-full bg-green-900/50 px-2 py-1 text-xs font-medium text-green-300">
-                      Completed
-                    </span>
-                  </td>
-                  <td className="py-3 text-white">28%</td>
-                  <td className="py-3 text-right">
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href="/claims/CL-1234">View</Link>
-                    </Button>
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-700">
-                  <td className="py-3 text-white">CL-1233</td>
-                  <td className="py-3 text-gray-300">Jun 4, 2025</td>
-                  <td className="py-3">
-                    <span className="rounded-full bg-amber-900/50 px-2 py-1 text-xs font-medium text-amber-300">
-                      Pending
-                    </span>
-                  </td>
-                  <td className="py-3 text-white">--</td>
-                  <td className="py-3 text-right">
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href="/claims/CL-1233">View</Link>
-                    </Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 text-white">CL-1232</td>
-                  <td className="py-3 text-gray-300">Jun 3, 2025</td>
-                  <td className="py-3">
-                    <span className="rounded-full bg-red-900/50 px-2 py-1 text-xs font-medium text-red-300">
-                      High Risk
-                    </span>
-                  </td>
-                  <td className="py-3 text-white">76%</td>
-                  <td className="py-3 text-right">
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href="/claims/CL-1232">View</Link>
-                    </Button>
-                  </td>
-                </tr>
+                {claims.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="py-3 text-center text-gray-400">No claims found.</td>
+                  </tr>
+                ) : (
+                  claims.map((claim) => (
+                    <tr key={claim.id} className="border-b border-gray-700">
+                      <td className="py-3 text-white">CL-{claim.id}</td>
+                      <td className="py-3 text-white">{claim.providerId ?? '--'}</td>
+                      <td className="py-3 text-white">
+                        {claim.prediction
+                          ? claim.prediction.charAt(0).toUpperCase() + claim.prediction.slice(1)
+                          : '--'}
+                      </td>
+                      <td className="py-3 text-white">
+                        {claim.confidenceScore !== undefined && claim.confidenceScore !== null
+                          ? `${claim.confidenceScore}%`
+                          : "--"}
+                      </td>
+                      <td className="py-3 text-right">
+                        <Button variant="ghost" size="sm" asChild>
+                          <Link href={`/claims/${claim.id}`}>View</Link>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

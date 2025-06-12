@@ -1,9 +1,9 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -34,6 +34,7 @@ const insuranceTypes = [
 
 export default function NewClaimPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form state
@@ -46,6 +47,27 @@ export default function NewClaimPage() {
     dateOfService: "",
     notes: "",
   });
+
+  useEffect(() => {
+    const editParam = searchParams.get("edit");
+    if (editParam) {
+      try {
+        const decoded = atob(decodeURIComponent(editParam));
+        const parsed = JSON.parse(decoded);
+        setFormData({
+          billedAmount: parsed.billedAmount || "",
+          insuranceType: parsed.insuranceType || "",
+          providerId: parsed.providerId || "",
+          procedureCode: parsed.procedureCode || "",
+          diagnosisCode: parsed.diagnosisCode || "",
+          dateOfService: parsed.dateOfService || "",
+          notes: parsed.notes || "",
+        });
+      } catch (e) {
+        // ignore if invalid
+      }
+    }
+  }, [searchParams]);
 
   // Handle input changes
   const handleChange = (
@@ -80,8 +102,8 @@ export default function NewClaimPage() {
     setIsSubmitting(true);
 
     try {
-      // POST claim data (prediction is handled in backend)
-      const response = await fetch("/api/claims", {
+      // Call /api/predict to get prediction (do not save to DB yet)
+      const response = await fetch("/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -97,19 +119,59 @@ export default function NewClaimPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit claim");
+        throw new Error("Failed to get prediction");
       }
 
       const result = await response.json();
       // Pass prediction in query param (base64-encoded)
-      const predictionStr = encodeURIComponent(
-        btoa(JSON.stringify(result.prediction))
-      );
-      router.push(`/claims/review?prediction=${predictionStr}`);
+      const reviewData = {
+        ...formData,
+        prediction: result.prediction,
+      };
+      const encoded = encodeURIComponent(btoa(JSON.stringify(reviewData)));
+      router.push(`/claims/review?data=${encoded}`);
     } catch (error) {
       toast({
-        title: "Submission failed",
-        description: "There was an error submitting your claim.",
+        title: "Prediction failed",
+        description: "There was an error generating the prediction.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSaveClaim = async () => {
+    setIsSubmitting(true);
+    try {
+      // POST claim + prediction data to /api/claims
+      const response = await fetch("/api/claims", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider_id: Number(formData.providerId),
+          procedure_code: formData.procedureCode,
+          diagnosis_code: formData.diagnosisCode,
+          billed_amount: formData.billedAmount
+            ? Number(formData.billedAmount)
+            : null,
+          insurance_type: formData.insuranceType,
+          additional_info: formData.notes,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save claim");
+      }
+      toast({
+        title: "Claim saved!",
+        description: "The claim has been saved to the dashboard.",
+        variant: "default",
+      });
+      router.push("/");
+    } catch (error) {
+      toast({
+        title: "Save failed",
+        description: "There was an error saving your claim.",
         variant: "destructive",
       });
     } finally {
@@ -226,7 +288,7 @@ export default function NewClaimPage() {
                 {/* Third row */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="billedAmount">Billed Amount ($)</Label>
+                    <Label htmlFor="billedAmount">Billed Amount ($) <span className="text-red-500">*</span></Label>
                     <Input
                       id="billedAmount"
                       name="billedAmount"
@@ -236,6 +298,7 @@ export default function NewClaimPage() {
                       placeholder="0.00"
                       value={formData.billedAmount}
                       onChange={handleChange}
+                      required
                     />
                   </div>
 

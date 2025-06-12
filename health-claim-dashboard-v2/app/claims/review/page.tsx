@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,8 +19,11 @@ type ReviewStatus = "pending" | "analyzing" | "complete";
 
 export default function ClaimReviewPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [status, setStatus] = useState<ReviewStatus>("pending");
   const [progress, setProgress] = useState(0);
+  const [predictionObj, setPredictionObj] = useState<any>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [confidence, setConfidence] = useState<number | null>(null);
   const [likelihoodPercent, setLikelihoodPercent] = useState<number | null>(
@@ -30,13 +33,17 @@ export default function ClaimReviewPage() {
   const [nextSteps, setNextSteps] = useState<string[] | null>(null);
   const [analysisDetails, setAnalysisDetails] = useState<any>(null);
   const [acceptedReasons, setAcceptedReasons] = useState<string[] | null>(null);
+  const [reviewData, setReviewData] = useState<any>(null);
 
   useEffect(() => {
-    const predictionParam = searchParams.get("prediction");
-    if (predictionParam) {
+    const dataParam = searchParams.get("data");
+    if (dataParam) {
       try {
-        const decoded = atob(decodeURIComponent(predictionParam));
-        const predictionJson = JSON.parse(decoded);
+        const decoded = atob(decodeURIComponent(dataParam));
+        const parsed = JSON.parse(decoded);
+        setReviewData(parsed);
+        // Extract prediction fields for display
+        const predictionJson = parsed.prediction || {};
         setPrediction(predictionJson.prediction ?? null);
         setConfidence(
           predictionJson.confidence_percent !== undefined
@@ -78,6 +85,53 @@ export default function ClaimReviewPage() {
       </div>
     );
   }
+
+  const handleSaveClaim = async () => {
+    if (!reviewData) return;
+    setIsSaving(true);
+    try {
+      let dateCreated = null;
+      const predictionJson = reviewData.prediction || {};
+      // Try to get date_of_service from form or prediction
+      const dateOfService = reviewData.dateOfService || reviewData.date_of_service || (predictionJson.analysis_details && predictionJson.analysis_details.date_of_service);
+      if (dateOfService) {
+        dateCreated = String(dateOfService).slice(0, 10); // always a string
+      } else {
+        const today = new Date();
+        dateCreated = today.toISOString().slice(0, 10); // always a string
+      }
+      // Merge form data and prediction fields
+      const payload = {
+        provider_id: reviewData.providerId || reviewData.provider_id,
+        procedure_code: reviewData.procedureCode || reviewData.procedure_code,
+        diagnosis_code: reviewData.diagnosisCode || reviewData.diagnosis_code,
+        billed_amount: reviewData.billedAmount || reviewData.billed_amount,
+        insurance_type: reviewData.insuranceType || reviewData.insurance_type,
+        additional_info: reviewData.notes || reviewData.additional_info,
+        ...predictionJson,
+        date_created: dateCreated,
+      };
+      const response = await fetch("/api/claims", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save claim");
+      }
+      router.push("/");
+    } catch (error) {
+      setIsSaving(false);
+    }
+  };
+
+  const handleEditClaim = () => {
+    if (!reviewData) return;
+    // Remove the prediction field before sending back
+    const { prediction, ...formFields } = reviewData;
+    const encoded = encodeURIComponent(btoa(JSON.stringify(formFields)));
+    router.push(`/claims/new?edit=${encoded}`);
+  };
 
   const renderStatusContent = () => {
     switch (status) {
@@ -131,7 +185,6 @@ export default function ClaimReviewPage() {
                 <h2 className="text-xl font-semibold text-gray-200">
                   Analysis Complete
                 </h2>
-                <p className="text-gray-400">Review finished on June 7, 2025</p>
               </div>
             </div>
 
@@ -188,10 +241,10 @@ export default function ClaimReviewPage() {
                         {prediction === "denied" &&
                           denialReasons &&
                           denialReasons.length > 0 && (
-                            <div className="mt-2">
-                              <strong>Denial Reasons:</strong>
+                          <div className="mt-2">
+                            <strong>Denial Reasons:</strong>
                               <ul className="space-y-2">
-                                {denialReasons.map((reason, idx) => (
+                              {denialReasons.map((reason, idx) => (
                                   <li key={idx} className="flex items-start">
                                     <span className="mr-2 mt-0.5 text-blue-400">
                                       •
@@ -200,10 +253,10 @@ export default function ClaimReviewPage() {
                                       {reason}
                                     </span>
                                   </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ) : (
@@ -247,8 +300,16 @@ export default function ClaimReviewPage() {
             </Alert>
 
             <div className="mt-6 flex justify-end space-x-4">
-              <Button variant="outline">Edit Claim</Button>
-              <Button>Save Claim</Button>
+              <Button variant="outline" onClick={handleEditClaim}>
+                Edit Claim
+              </Button>
+              <Button onClick={handleSaveClaim} disabled={isSaving}>
+                {isSaving ? (
+                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving...</>
+                ) : (
+                  "Save Claim"
+                )}
+              </Button>
             </div>
           </div>
         );
@@ -265,9 +326,7 @@ export default function ClaimReviewPage() {
           </Link>
         </Button>
         <h1 className="text-2xl font-bold text-white">Claim Review</h1>
-        <p className="text-gray-400">
-          Claim ID: CL-1235 • Submitted on June 7, 2025
-        </p>
+
       </div>
 
       <Card>{renderStatusContent()}</Card>

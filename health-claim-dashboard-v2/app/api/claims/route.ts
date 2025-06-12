@@ -30,19 +30,33 @@ async function runPythonPrediction(claimData: any) {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    console.log('Prediction input:', data);
-    // Skip DB insert for now
-    const predictionJson: any = await runPythonPrediction(data);
-    console.log('Prediction output:', predictionJson);
+    // Save all claim and prediction data provided in the request
+    const [newClaim] = await db.insert(claim)
+      .values({
+        providerId: data.provider_id,
+        procedureCode: data.procedure_code,
+        diagnosisCode: data.diagnosis_code,
+        billedAmount: data.billed_amount,
+        insuranceType: data.insurance_type,
+        additionalInfo: data.additional_info,
+        prediction: data.prediction,
+        confidenceScore: data.confidence_percent,
+        likelihoodPercent: data.likelihood_percent,
+        denialReasons: data.denial_reasons,
+        acceptedReasons: data.accepted_reasons,
+        nextSteps: data.next_steps,
+        analysisDetails: data.analysis_details,
+      })
+      .returning();
+
     return NextResponse.json({
       success: true,
-      data: { id: 1 }, // fake id for review page
-      prediction: predictionJson,
+      data: newClaim,
     });
   } catch (error) {
-    console.error('Error (bypassing DB):', error);
+    console.error('Error:', error);
     return NextResponse.json(
-      { error: 'Error generating prediction', details: error?.toString() },
+      { error: 'Error saving claim', details: error?.toString() },
       { status: 500 }
     );
   }
@@ -78,18 +92,21 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
-    if (!id) {
-      return NextResponse.json({ error: 'Missing claim id' }, { status: 400 });
+    if (id) {
+      const result = await db.select().from(claim).where(eq(claim.id, Number(id)));
+      if (!result[0]) {
+        return NextResponse.json({ error: 'Claim not found' }, { status: 404 });
+      }
+      return NextResponse.json({ success: true, data: result[0] });
+    } else {
+      // Fetch all claims
+      const results = await db.select().from(claim);
+      return NextResponse.json({ success: true, data: results });
     }
-    const result = await db.select().from(claim).where(eq(claim.id, Number(id)));
-    if (!result[0]) {
-      return NextResponse.json({ error: 'Claim not found' }, { status: 404 });
-    }
-    return NextResponse.json({ success: true, data: result[0] });
   } catch (error) {
-    console.error('Error fetching claim:', error);
+    console.error('Error fetching claim(s):', error);
     return NextResponse.json(
-      { error: 'Error fetching claim' },
+      { error: 'Error fetching claim(s)' },
       { status: 500 }
     );
   }
